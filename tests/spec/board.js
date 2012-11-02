@@ -10,16 +10,51 @@ describe("A board", function() {
 		expect(board.columns).toEqual(6);
 	});
 
-	it("should populate a board with tiles", function() {
-		expect(board.tiles.length).toEqual(5);
+	describe("should populate a board with tiles", function() {
+		it("when no letters are specified", function() {
+			expect(board.tiles.length).toEqual(5);
 
-		for (var r = 0; r < board.tiles; r++) {
-			expect(board.tiles[r].length).toEqual(6);
+			for (var r = 0; r < board.tiles; r++) {
+				expect(board.tiles[r].length).toEqual(6);
 
-			for (var c = 0; c < board.tiles; c++) {
-				expect(board.tiles[r][c]).not.toBe(null);
+				for (var c = 0; c < board.tiles; c++) {
+					expect(board.tiles[r][c]).not.toBe(null);
+				}
 			}
-		}
+		});
+
+		it("when letters are specified", function() {
+			board = new Board(2, 2, "abcd");
+
+			expect(board.tiles[0][0].letter).toEqual('A');
+			expect(board.tiles[0][1].letter).toEqual('B');
+			expect(board.tiles[1][0].letter).toEqual('C');
+			expect(board.tiles[1][1].letter).toEqual('D');
+		});
+	});
+
+	describe("when letters are specified", function() {
+		it("should convert the letters to uppercase", function() {
+			board = new Board(2, 2, "abcd");
+
+			expect(board.tiles[0][0].letter).toEqual('A');
+			expect(board.tiles[0][1].letter).toEqual('B');
+			expect(board.tiles[1][0].letter).toEqual('C');
+			expect(board.tiles[1][1].letter).toEqual('D');
+		});
+
+		it("should throw an exception when letters do not match board size", function() {
+			var creationSmall = function() {
+				board = new Board(2, 2, "abc");
+			};
+
+			var creationBig = function() {
+				board = new Board(2, 2, "abcde");
+			};
+
+			expect(creationSmall).toThrow();
+			expect(creationBig).toThrow();
+		});
 	});
 
 	describe("should get the tile", function() {

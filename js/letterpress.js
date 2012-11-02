@@ -2,17 +2,31 @@ var Letterpress = function() {
 	var board = new Board(5, 5);
 };
 
-var Board = function(rows, columns) {
+var Board = function(rows, columns, letters) {
 	this.rows = rows;
 	this.columns = columns;
 
 	this.tiles = [];
 
+	if (letters && letters.length != rows * columns) {
+		throw new Error("Letters does not match the number of tiles specified.");
+	} else if (letters) {
+		letters = letters.toUpperCase();
+	}
+
+	var letter = null;
+
 	for (var r = 0; r < rows; r++) {
 		this.tiles[r] = [];
 
 		for (var c = 0; c < columns; c++) {
-			this.tiles[r][c] = new Tile(null, r, c, this);
+			if (letters) {
+				letter = letters.substring((r * columns) + c, (r * columns) + c + 1);
+			} else {
+				letter = String.fromCharCode(Math.random() * (90 - 65) + 65);
+			}
+
+			this.tiles[r][c] = new Tile(letter, r, c, this);
 		}
 	}
 
