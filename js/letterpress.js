@@ -16,8 +16,6 @@ var Board = function(rows, columns) {
 		}
 	}
 
-
-
 	this.getTileAtPosition = function(row, column) {
 		if (row < 0 || column < 0) {
 			return null;
