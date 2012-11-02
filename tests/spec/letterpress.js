@@ -24,4 +24,36 @@ describe("A Letterpress game", function() {
 
 		expect(createGame).not.toThrow();
 	});
+
+	it("should start the game with the first player", function() {
+		var letterpress = new Letterpress(board, players);
+
+		expect(letterpress.currentPlayer).toEqual(players[0]);
+	});
+
+	describe("should move to the next player after a turn", function() {
+		var letterpress;
+
+		beforeEach(function() {
+			letterpress = new Letterpress(board, players);
+		});
+
+		it("when the current player is the first player", function() {
+			expect(letterpress.currentPlayer).toEqual(players[0]);
+
+			letterpress.play(null);
+
+			expect(letterpress.currentPlayer).toEqual(players[1]);
+		});
+
+		it("when the current player is the last player", function() {
+			letterpress.currentPlayer = players[1];
+
+			expect(letterpress.currentPlayer).toEqual(players[1]);
+
+			letterpress.play(null);
+
+			expect(letterpress.currentPlayer).toEqual(players[0]);
+		});
+	});
 });
