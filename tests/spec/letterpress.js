@@ -11,7 +11,7 @@ describe("A Letterpress game", function() {
 
 	it("should throw an exception with less than two players", function() {
 		function createGame() {
-			var letterpress = new Letterpress(board, []]);
+			var letterpress = new Letterpress(board, []);
 		}
 
 		expect(createGame).toThrow();
