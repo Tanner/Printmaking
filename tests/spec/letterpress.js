@@ -3,21 +3,21 @@ describe("A Letterpress game", function() {
 
 	beforeEach(function() {
 		board = new Board(5, 5);
+
 		players = [];
+		players.push(new Player("Tanner", "#F00"));
+		players.push(new Player("Buzz", "#0F0"));
 	});
 
 	it("should throw an exception with less than two players", function() {
 		function createGame() {
-			var letterpress = new Letterpress(board, players);
+			var letterpress = new Letterpress(board, []]);
 		}
 
 		expect(createGame).toThrow();
 	});
 
 	it("should not throw an exception with two players or more", function() {
-		players.push(new Player("Buzz", "#000"));
-		players.push(new Player("Buzz", "#000"));
-
 		function createGame() {
 			var letterpress = new Letterpress(board, players);
 		}
