@@ -18,6 +18,32 @@ describe("A tile", function() {
 		expect(tile.owner).toBe(null);
 	});
 
+	it("should be defended with 4 tiles around it of the same owner", function() {
+		var board = new Board(3, 3);
+
+		board.tiles[1][1].owner = 0;
+
+		board.tiles[0][1].owner = 0;
+		board.tiles[2][1].owner = 0;
+		board.tiles[1][0].owner = 0;
+		board.tiles[1][2].owner = 0;
+
+		expect(board.tiles[1][1].isDefended()).toBe(true);
+	});
+
+	it("should not be defended with 4 tiles around it of different owners", function() {
+		var board = new Board(3, 3);
+
+		board.tiles[1][1].owner = 0;
+
+		board.tiles[0][1].owner = 1;
+		board.tiles[2][1].owner = 2;
+		board.tiles[1][0].owner = 3;
+		board.tiles[1][2].owner = 4;
+
+		expect(board.tiles[1][1].isDefended()).toBe(false);
+	});
+
 	describe("should be able to get its adjacent tiles", function() {
 		var board;
 

@@ -36,6 +36,23 @@ var Tile = function(letter, row, column, board) {
 	this.letter = letter;
 	this.owner = null;
 
+	this.isDefended = function() {
+		var neighbors = this.getAdjacentTiles();
+
+		if (neighbors.length == 4) {
+			// Ensure all neighbors are the same owner as this tile
+			for (var i in neighbors) {
+				if (neighbors[i].owner != this.owner) {
+					return false;
+				}
+			}
+
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	this.getAdjacentTiles = function() {
 		var neighbors = [];
 
