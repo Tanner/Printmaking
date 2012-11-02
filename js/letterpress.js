@@ -8,6 +8,11 @@ var Letterpress = function(board, players) {
 		throw new Error("Must have at least 2 players.");
 	}
 
+	this.play = function(move) {
+		this.currentPlayerIndex++;
+		this.currentPlayerIndex = this.currentPlayerIndex % this.players.length;
+	};
+
 	this.getCurrentPlayer = function() {
 		return this.players[this.currentPlayerIndex];
 	};
