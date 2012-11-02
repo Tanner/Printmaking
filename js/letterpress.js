@@ -2,6 +2,12 @@ var Letterpress = function() {
 	var board = new Board(5, 5);
 };
 
+var Player = function(name, color) {
+	this.name = name;
+	this.color = color;
+	this.score = 0;
+}
+
 var Board = function(rows, columns, letters) {
 	this.rows = rows;
 	this.columns = columns;
