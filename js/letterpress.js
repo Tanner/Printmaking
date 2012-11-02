@@ -36,13 +36,21 @@ var Tile = function(letter, row, column, board) {
 	this.letter = letter;
 	this.owner = null;
 
-	function getAdjacentTiles() {
+	this.getAdjacentTiles = function() {
 		var neighbors = [];
 
-		neighbors.append(getTileAtPosition(this.row - 1, this.column));
-		neighbors.append(getTileAtPosition(this.row, this.column - 1));
-		neighbors.append(getTileAtPosition(this.row, this.column + 1));
-		neighbors.append(getTileAtPosition(this.row + 1, this.column));
+		function addNeighbor(row, column) {
+			var tile = board.getTileAtPosition(row, column);
+
+			if (tile != null) {
+				neighbors.push(tile);
+			}
+		}
+
+		addNeighbor(this.row - 1, this.column);
+		addNeighbor(this.row, this.column - 1);
+		addNeighbor(this.row, this.column + 1);
+		addNeighbor(this.row + 1, this.column);
 
 		return neighbors;
 	}
