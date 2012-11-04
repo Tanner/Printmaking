@@ -12,9 +12,33 @@ var Letterpress = function(board, players) {
 
 	this.play = function(move) {
 		if (move) {
+			// Make sure that the move is valid first
 			if (move.valid(this.board) == false) {
 				return false;
 			}
+
+			// Check to ensure that the move is not a duplicate word or a prefix
+			var word = move.word(board);
+
+			for (var i = 0; i < this.playedWords.length; i++) {
+				var otherWord = this.playedWords[i];
+
+				if (word == otherWord) {
+					// Word is a duplicate
+					return false;
+				} else {
+					// Check to see if the word is a prefix
+					for (var j = 1; j <= otherWord.length; j++) {
+						if (word == otherWord.substring(0, j)) {
+							// Word is a prefix of an already played word
+							return false;
+						}
+					}
+				}
+			}
+
+			// Word passes all tests, so we can play it
+			this.playedWords.push(word);
 		}
 
 		this.currentPlayerIndex++;
