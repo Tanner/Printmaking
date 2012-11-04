@@ -61,7 +61,7 @@ var Move = function(tiles) {
 	}
 
 	this.word = function(board) {
-		if (this.valid() != true) {
+		if (this.valid(board) != true) {
 			return null;
 		}
 
