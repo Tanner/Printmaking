@@ -236,9 +236,9 @@ var Tile = function(letter, row, column, board) {
 				return true;
 			} else if (row == 0 && column == board.columns - 1) {
 				return true;
-			} else if (row == board.rows - 1 && columns == 0) {
+			} else if (row == board.rows - 1 && column == 0) {
 				return true;
-			} else if (row == board.rows - 1 && columns == board.columns - 1) {
+			} else if (row == board.rows - 1 && column == board.columns - 1) {
 				return true;
 			}
 
