@@ -18,30 +18,78 @@ describe("A tile", function() {
 		expect(tile.owner).toBe(null);
 	});
 
-	it("should be defended with 4 tiles around it of the same owner", function() {
-		var board = new Board(3, 3);
+	describe("should be not defended", function() {
+		var board;
 
-		board.tiles[1][1].owner = 0;
+		beforeEach(function() {
+			board = new Board(3, 3);
+		});
 
-		board.tiles[0][1].owner = 0;
-		board.tiles[2][1].owner = 0;
-		board.tiles[1][0].owner = 0;
-		board.tiles[1][2].owner = 0;
+		it("when surrounded by 4 tiles of different owners", function() {
+			board.tiles[1][1].owner = 0;
 
-		expect(board.tiles[1][1].isDefended()).toBe(true);
+			board.tiles[0][1].owner = 0;
+			board.tiles[2][1].owner = 0;
+			board.tiles[1][0].owner = 1;
+			board.tiles[1][2].owner = 0;
+
+			expect(board.tiles[1][1].isDefended()).toBe(false);
+		});
+
+		it("when in a corner surrounded by 2 tiles of different owners", function() {
+			board.tiles[0][0].owner = 0;
+			board.tiles[0][1].owner = 0;
+			board.tiles[1][0].owner = 1;
+
+			expect(board.tiles[0][0].isDefended()).toBe(false);
+		});
+
+		it("when on an edge surrounded by 3 tiles of different owner", function() {
+			board.tiles[0][0].owner = 0;
+			board.tiles[0][1].owner = 0;
+			board.tiles[0][2].owner = 0;
+
+			board.tiles[1][1].owner = 1;
+
+			expect(board.tiles[0][1].isDefended()).toBe(false);
+		});
 	});
 
-	it("should not be defended with 4 tiles around it of different owners", function() {
-		var board = new Board(3, 3);
+	describe("should be defended", function() {
+		var board;
 
-		board.tiles[1][1].owner = 0;
+		beforeEach(function() {
+			board = new Board(3, 3);
+		});
 
-		board.tiles[0][1].owner = 1;
-		board.tiles[2][1].owner = 2;
-		board.tiles[1][0].owner = 3;
-		board.tiles[1][2].owner = 4;
+		it("when surrounded by 4 tiles of the same owner", function() {
+			board.tiles[1][1].owner = 0;
 
-		expect(board.tiles[1][1].isDefended()).toBe(false);
+			board.tiles[0][1].owner = 0;
+			board.tiles[2][1].owner = 0;
+			board.tiles[1][0].owner = 0;
+			board.tiles[1][2].owner = 0;
+
+			expect(board.tiles[1][1].isDefended()).toBe(true);
+		});
+
+		it("when in a corner surrounded by 2 tiles of the same owner", function() {
+			board.tiles[0][0].owner = 0;
+			board.tiles[0][1].owner = 0;
+			board.tiles[1][0].owner = 0;
+
+			expect(board.tiles[0][0].isDefended()).toBe(true);
+		});
+
+		it("when on an edge surrounded by 3 tiles of the same owner", function() {
+			board.tiles[0][0].owner = 0;
+			board.tiles[0][1].owner = 0;
+			board.tiles[0][2].owner = 0;
+
+			board.tiles[1][1].owner = 0;
+
+			expect(board.tiles[0][1].isDefended()).toBe(true);
+		});
 	});
 
 	describe("should be able to get its adjacent tiles", function() {
