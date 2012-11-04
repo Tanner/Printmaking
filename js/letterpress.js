@@ -37,8 +37,27 @@ var Player = function(name, color) {
 var Move = function(tiles) {
 	this.tiles = tiles;
 
-	this.valid = function() {
-		return this.tiles.length >= 2;
+	this.valid = function(board) {
+		if (this.tiles.length < 2) {
+			return false;
+		}
+
+		for (var i in this.tiles) {
+			var tile = this.tiles[i];
+
+			if (board.getTileAtPosition(tile.row, tile.column) == null) {
+				return false;
+			}
+
+			// Search for duplicates (long way)
+			for (var j = i + 1; j < this.tiles.length; j++) {
+				if (this.tiles[j] == tile) {
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 
 	this.word = function(board) {
