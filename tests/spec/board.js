@@ -106,4 +106,70 @@ describe("A board", function() {
 			});
 		});
 	});
+
+	describe("should update the board from a move", function() {
+		beforeEach(function() {
+			board = new Board(2, 2, "cats");
+		});
+
+		it("that will cause just owner changes", function() {
+			var move = new Move([
+				{row: 0, column: 0},
+				{row: 0, column: 1},
+				{row: 1, column: 0},
+				{row: 1, column: 1}
+			]); // cats
+
+			var player = 0;
+
+			board.play(player, move);
+
+			for (var row = 0; row < board.rows; row++) {
+				for (var column = 0; column < board.columns; column++) {
+					expect(board.tiles[row][column].owner).toEqual(player);
+				}
+			}
+		});
+
+		it("that will cause a tile to become defended", function() {
+			var move = new Move([
+				{row: 0, column: 0},
+				{row: 0, column: 1},
+				{row: 1, column: 0}
+			]); // cat
+
+			var player = 0;
+
+			board.play(player, move);
+
+			var defendedTile = board.getTileAtPosition(0, 0); // c
+
+			expect(defendedTile.isDefended()).toEqual(true);
+		});
+
+		it("that will cause a defended tile's owner to not change", function() {
+			var move = new Move([
+				{row: 0, column: 0},
+				{row: 0, column: 1},
+				{row: 1, column: 0}
+			]); // cat
+
+			board.play(0, move);
+
+			move = new Move([
+				{row: 0, column: 0},
+				{row: 0, column: 1},
+				{row: 1, column: 0},
+				{row: 1, column: 1}
+			]); // cats
+
+			board.play(1, move);
+
+			var defendedTile = board.getTileAtPosition(0, 0); // c
+			console.log(defendedTile);
+
+			expect(defendedTile.isDefended()).toEqual(false);
+			expect(defendedTile.owner).toEqual(0);
+		});
+	});
 });
