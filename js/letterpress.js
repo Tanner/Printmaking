@@ -219,7 +219,41 @@ var Tile = function(letter, row, column, board) {
 	this.isDefended = function() {
 		var neighbors = this.getAdjacentTiles();
 
-		if (neighbors.length == 4) {
+		function onEdge(row, column) {
+			if (row == 0 || column == 0) {
+				return true;
+			}
+
+			if (row == board.rows - 1 || column == board.columns - 1) {
+				return true;
+			}
+
+			return false;
+		}
+
+		function onCorner(row, column) {
+			if (row == 0 && column == 0) {
+				return true;
+			} else if (row == 0 && column == board.columns - 1) {
+				return true;
+			} else if (row == board.rows - 1 && columns == 0) {
+				return true;
+			} else if (row == board.rows - 1 && columns == board.columns - 1) {
+				return true;
+			}
+
+			return false;
+		}
+
+		var neighborsRequired = 4;
+
+		if (onCorner(this.row, this.column) == true) {
+			neighborsRequired = 2;
+		} else if (onEdge(this.row, this.column) == true) {
+			neighborsRequired = 3;
+		}
+
+		if (neighbors.length == neighborsRequired) {
 			// Ensure all neighbors are the same owner as this tile
 			for (var i in neighbors) {
 				if (neighbors[i].owner != this.owner) {
