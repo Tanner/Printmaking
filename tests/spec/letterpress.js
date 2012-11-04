@@ -57,57 +57,61 @@ describe("A Letterpress game", function() {
 		});
 	});
 
-	it("should not allow you to play an invalid move", function() {
-		var move = new Move([
-			{row: 0, column: 0}
-		]);
+	describe("should allow you to play", function() {
+		it("a valid move", function() {
+			var move = new Move([
+				{row: 0, column: 0},
+				{row: 1, column: 0}
+			]);
 
-		var letterpress = new Letterpress(board, players);
+			var letterpress = new Letterpress(board, players);
 
-		expect(letterpress.play(move)).toBe(false);
+			expect(letterpress.play(move)).toBe(true);	
+		});
 	});
 
-	it("should allow you to play a valid move", function() {
-		var move = new Move([
-			{row: 0, column: 0},
-			{row: 1, column: 0}
-		]);
+	describe("should not allow you to play", function() {
+		it("an invalid move", function() {
+			var move = new Move([
+				{row: 0, column: 0}
+			]);
 
-		var letterpress = new Letterpress(board, players);
+			var letterpress = new Letterpress(board, players);
 
-		expect(letterpress.play(move)).toBe(true);	
-	});
+			expect(letterpress.play(move)).toBe(false);
+		});
 
-	it("should not allow you to play the same move twice", function() {
-		var move = new Move([
-			{row: 0, column: 0},
-			{row: 1, column: 0}
-		]);
+		it("the same move twice", function() {
+			var move = new Move([
+				{row: 0, column: 0},
+				{row: 1, column: 0}
+			]);
 
-		var letterpress = new Letterpress(board, players);
+			var letterpress = new Letterpress(board, players);
 
-		expect(letterpress.play(move)).toBe(true);
-		expect(letterpress.play(move)).toBe(false);
-	});
+			expect(letterpress.play(move)).toBe(true);
+			expect(letterpress.play(move)).toBe(false);
+		});
 
-	it("should not allow you to play a prefix of an existing word", function() {
-		var move = new Move([
-			{row: 0, column: 0},
-			{row: 0, column: 1},
-			{row: 1, column: 0},
-			{row: 1, column: 1}
-		]); // cats
+		it("a prefix of an existing word", function() {
+			var move = new Move([
+				{row: 0, column: 0},
+				{row: 0, column: 1},
+				{row: 1, column: 0},
+				{row: 1, column: 1}
+			]); // cats
 
-		var letterpress = new Letterpress(new Board(2, 2, "cats"), players);
+			var letterpress = new Letterpress(new Board(2, 2, "cats"), players);
 
-		expect(letterpress.play(move)).toBe(true);
+			expect(letterpress.play(move)).toBe(true);
 
-		move = new Move([
-			{row: 0, column: 0},
-			{row: 0, column: 1},
-			{row: 1, column: 0},
-		]); // cat
+			move = new Move([
+				{row: 0, column: 0},
+				{row: 0, column: 1},
+				{row: 1, column: 0},
+			]); // cat
 
-		expect(letterpress.play(move)).toBe(false);
+			expect(letterpress.play(move)).toBe(false);
+		});
 	});
 });
