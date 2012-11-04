@@ -114,4 +114,27 @@ describe("A Letterpress game", function() {
 			expect(letterpress.play(move)).toBe(false);
 		});
 	});
+
+	describe("should end the game", function() {
+		it("when all the players have passed their turns", function() {
+			var letterpress = new Letterpress(board, players);
+
+			letterpress.play(null);
+			letterpress.play(null);
+
+			expect(letterpress.isGameOver()).toBe(true);
+		});
+
+		it("when all tiles have owners", function() {
+			board = new Board(2, 2);
+			var letterpress = new Letterpress(board, players);
+
+			board.tiles[0][0].owner = 0;
+			board.tiles[0][1].owner = 0;
+			board.tiles[1][0].owner = 0;
+			board.tiles[1][1].owner = 0;
+
+			expect(letterpress.isGameOver()).toBe(true);
+		});
+	});
 });

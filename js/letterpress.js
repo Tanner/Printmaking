@@ -2,6 +2,7 @@ var Letterpress = function(board, players) {
 	this.board = board;
 	this.players = players;
 
+	this.passes = 0;
 	this.playedWords = [];
 
 	this.currentPlayerIndex = 0;
@@ -12,6 +13,8 @@ var Letterpress = function(board, players) {
 
 	this.play = function(move) {
 		if (move) {
+			this.passes = 0;
+
 			// Make sure that the move is valid first
 			if (move.valid(this.board) == false) {
 				return false;
@@ -41,6 +44,8 @@ var Letterpress = function(board, players) {
 			this.playedWords.push(word);
 
 			this.board.play(this.currentPlayerIndex, move);
+		} else {
+			this.passes++;
 		}
 
 		this.currentPlayerIndex++;
@@ -48,6 +53,18 @@ var Letterpress = function(board, players) {
 
 		return true;
 	};
+
+	this.isGameOver = function() {
+		if (this.passes == this.players.length) {
+			return true;
+		}
+
+		if (board.allTilesOwned() == true) {
+			return true;
+		}
+
+		return false;
+	}
 
 	this.getCurrentPlayer = function() {
 		return this.players[this.currentPlayerIndex];
@@ -204,6 +221,20 @@ var Board = function(rows, columns, letters) {
 				boardTile.owner = playerIndex;
 			}
 		}
+	}
+
+	this.allTilesOwned = function() {
+		for (var r = 0; r < rows; r++) {
+			for (var c = 0; c < columns; c++) {
+				var tile = this.tiles[r][c];
+
+				if (tile.owner == null) {
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 };
 
