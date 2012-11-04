@@ -16,4 +16,17 @@ describe("A move", function() {
 
 		expect(move.valid()).toBe(false);
 	});
+
+	it("should extract the word correctly from the board", function() {
+		var move = new Move([
+			{row: 0, column: 0},
+			{row: 0, column: 1},
+			{row: 1, column: 0},
+			{row: 1, column: 1}
+		]);
+
+		var board = new Board(2, 2, "cats");
+
+		expect(move.word(board)).toEqual("CATS");
+	});
 });
