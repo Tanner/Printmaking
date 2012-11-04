@@ -24,6 +24,14 @@ var Player = function(name, color) {
 	this.score = 0;
 }
 
+var Move = function(tiles) {
+	this.tiles = tiles;
+
+	this.valid = function() {
+		return this.tiles.length >= 2;
+	}
+}
+
 var Board = function(rows, columns, letters) {
 	this.rows = rows;
 	this.columns = columns;
