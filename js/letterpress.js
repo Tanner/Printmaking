@@ -42,7 +42,7 @@ var Move = function(tiles) {
 			return false;
 		}
 
-		for (var i in this.tiles) {
+		for (var i = 0; i < this.tiles.length; i++) {
 			var tile = this.tiles[i];
 
 			if (board.getTileAtPosition(tile.row, tile.column) == null) {
@@ -51,7 +51,8 @@ var Move = function(tiles) {
 
 			// Search for duplicates (long way)
 			for (var j = i + 1; j < this.tiles.length; j++) {
-				if (this.tiles[j] == tile) {
+				var otherTile = this.tiles[j];
+				if (tile.row == otherTile.row && tile.column == otherTile.column) {
 					return false;
 				}
 			}
