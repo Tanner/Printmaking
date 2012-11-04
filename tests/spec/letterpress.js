@@ -56,4 +56,14 @@ describe("A Letterpress game", function() {
 			expect(letterpress.getCurrentPlayer()).toEqual(players[0]);
 		});
 	});
+
+	it("should not allow you to play an invalid move", function() {
+		var move = new Move([
+			{row: 0, column: 0}
+		]);
+
+		var letterpress = new Letterpress(board, players);
+
+		expect(letterpress.play(move)).toBe(false);
+	});
 });

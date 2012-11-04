@@ -2,6 +2,8 @@ var Letterpress = function(board, players) {
 	this.board = board;
 	this.players = players;
 
+	this.playedWords = [];
+
 	this.currentPlayerIndex = 0;
 
 	if (players.length < 2) {
@@ -9,8 +11,16 @@ var Letterpress = function(board, players) {
 	}
 
 	this.play = function(move) {
+		if (move) {
+			if (move.valid() == false) {
+				return false;
+			}
+		}
+
 		this.currentPlayerIndex++;
 		this.currentPlayerIndex = this.currentPlayerIndex % this.players.length;
+
+		return true;
 	};
 
 	this.getCurrentPlayer = function() {
