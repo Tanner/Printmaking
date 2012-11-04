@@ -12,7 +12,7 @@ var Letterpress = function(board, players) {
 
 	this.play = function(move) {
 		if (move) {
-			if (move.valid() == false) {
+			if (move.valid(this.board) == false) {
 				return false;
 			}
 		}
