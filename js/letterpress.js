@@ -40,6 +40,22 @@ var Move = function(tiles) {
 	this.valid = function() {
 		return this.tiles.length >= 2;
 	}
+
+	this.word = function(board) {
+		if (this.valid() != true) {
+			return null;
+		}
+
+		var word = "";
+
+		for (var i in this.tiles) {
+			var tile = this.tiles[i];
+
+			word += board.getTileAtPosition(tile.row, tile.column).letter;
+		}
+
+		return word;
+	}
 }
 
 var Board = function(rows, columns, letters) {
