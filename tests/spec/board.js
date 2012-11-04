@@ -84,4 +84,26 @@ describe("A board", function() {
 			expect(board.getTileAtPosition(4, 5)).toEqual(board.tiles[4][5]);
 		});
 	});
+
+	describe("should calculate the score", function() {
+		beforeEach(function() {
+			board = new Board(2, 2, "cats");
+		});
+
+		it("when no players own any tiles", function() {
+			var move = new Move([
+				{row: 0, column: 0},
+				{row: 0, column: 1},
+				{row: 1, column: 0},
+			]); // cat
+
+			var playerIndex = 0;
+
+			var scoreChanges = board.getScoreChangesForMove(playerIndex, move);
+
+			expect(scoreChanges).toEqual({
+				0: { changed: 3 }
+			});
+		});
+	});
 });

@@ -138,7 +138,46 @@ var Board = function(rows, columns, letters) {
 		}
 
 		return this.tiles[row][column];
-	};
+	}
+
+	this.getScoreChangesForMove = function(playerIndex, move) {
+		var changes = {};
+
+		var moveTiles = move.tiles;
+
+		for (var i = 0; i < moveTiles.length; i++) {
+			var row = moveTiles[i].row;
+			var column = moveTiles[i].column;
+
+			var boardTile = this.tiles[row][column];
+			var boardOwner = boardTile.owner;
+
+			if (boardTile.owner != null) {
+				// Tile is owned
+				if (boardTile.isDefended() == true) {
+					// Tile is defended, so owner loses no points
+				} else {
+					// Tile is not defended, so owner loses points
+					if (changes[boardOwner] == undefined) {
+						changes[boardOwner] = {};
+						changes[boardOwner].changed = 0;
+					}
+					
+					changes[boardOwner].changed--;
+				}
+			} else {
+				// Tile is not owned
+				if (changes[playerIndex] == undefined) {
+					changes[playerIndex] = {};
+					changes[playerIndex].changed = 0;
+				}
+
+				changes[playerIndex].changed++;
+			}
+		}
+
+		return changes;
+	}
 };
 
 var Tile = function(letter, row, column, board) {
