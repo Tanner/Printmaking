@@ -39,6 +39,8 @@ var Letterpress = function(board, players) {
 
 			// Word passes all tests, so we can play it
 			this.playedWords.push(word);
+
+			this.board.play(this.currentPlayerIndex, move);
 		}
 
 		this.currentPlayerIndex++;
@@ -177,6 +179,31 @@ var Board = function(rows, columns, letters) {
 		}
 
 		return changes;
+	}
+
+	this.play = function(playerIndex, move) {
+		var moveTiles = move.tiles;
+
+		for (var i = 0; i < moveTiles.length; i++) {
+			var row = moveTiles[i].row;
+			var column = moveTiles[i].column;
+
+			var boardTile = this.tiles[row][column];
+			var boardOwner = boardTile.owner;
+
+			if (boardTile.owner != null) {
+				// Tile is owned
+				if (boardTile.isDefended() == true) {
+					// Tile is defended, so owner loses no points
+				} else {
+					// Tile is not defended, so owner loses points
+					boardTile.owner = playerIndex;
+				}
+			} else {
+				// Tile is not owned
+				boardTile.owner = playerIndex;
+			}
+		}
 	}
 };
 
