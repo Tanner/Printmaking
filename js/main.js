@@ -18,6 +18,8 @@ function init() {
 	}
 
 	$('#board').append(createBoard(board));
+
+	changeCurrentArrowColor(players[game.currentPlayerIndex].color);
 }
 
 function createBoard(board) {
@@ -55,4 +57,8 @@ function createPlayer(player) {
 	element.append(score);
 
 	return element;
+}
+
+function changeCurrentArrowColor(color) {
+	$('#current').css('border-color', 'rgb('+color.red+', '+color.green+', '+color.blue+') transparent transparent transparent');
 }
