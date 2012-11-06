@@ -24,7 +24,9 @@ function createBoard(board) {
 		var tableRow = $('<tr>');
 
 		for (var column = 0; column < board.columns; column++) {
-			tableRow.append(createTile(board.getTileAtPosition(row, column)));
+			var tile = createTile(board.getTileAtPosition(row, column));
+
+			tableRow.append($('<td>').append(tile));
 		}
 
 		tableRow.append('</tr>');
@@ -36,5 +38,5 @@ function createBoard(board) {
 }
 
 function createTile(tile) {
-	return $('<td><div class="tile" data-row='+tile.row+' data-column='+tile.column+'>'+tile.letter+'</div></td>');
+	return $('<div class="tile" data-row='+tile.row+' data-column='+tile.column+'>'+tile.letter+'</div>');
 }
