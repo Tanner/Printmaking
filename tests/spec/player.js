@@ -2,7 +2,7 @@ describe("A player", function() {
 	var player;
 
 	beforeEach(function() {
-		player = new Player("Tanner", "#000");
+		player = new Player("Tanner");
 	});
 
 	it("should have a name", function() {

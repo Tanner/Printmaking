@@ -5,8 +5,8 @@ describe("A Letterpress game", function() {
 		board = new Board(5, 5);
 
 		players = [];
-		players.push(new Player("Tanner", "#F00"));
-		players.push(new Player("Buzz", "#0F0"));
+		players.push(new Player("Tanner"));
+		players.push(new Player("Buzz"));
 	});
 
 	it("should throw an exception with less than two players", function() {

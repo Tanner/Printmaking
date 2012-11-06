@@ -79,10 +79,15 @@ var Letterpress = function(board, players) {
 	};
 };
 
-var Player = function(name, color) {
+var Player = function(name) {
 	this.name = name;
-	this.color = color;
 	this.score = 0;
+
+	this.color = {
+		red: Math.random() * 255,
+		blue: Math.random() * 255,
+		green: Math.random() * 255
+	}
 }
 
 var Move = function(tiles) {
