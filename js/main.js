@@ -18,27 +18,23 @@ function init() {
 }
 
 function createBoard(board) {
-	var boardElement = $('<ul class="board">');
+	var boardElement = $('<table>');
 
 	for (var row = 0; row < board.rows; row++) {
-		var rowElement = $('<li>');
-		var rowList = $('<ul class="row">');
+		var tableRow = $('<tr>');
 
 		for (var column = 0; column < board.columns; column++) {
-			rowList.append(createTile(board.getTileAtPosition(row, column)));
+			tableRow.append(createTile(board.getTileAtPosition(row, column)));
 		}
 
-		rowList.append('</ul>');
+		tableRow.append('</tr>');
 
-		rowElement.append(rowList);
-		rowElement.append('</li>');
-
-		boardElement.append(rowElement);
+		boardElement.append(tableRow);
 	}
 
 	return boardElement;
 }
 
 function createTile(tile) {
-	return $('<li class="tile" data-row='+tile.row+' data-column='+tile.column+'>'+tile.letter+'</li>');
+	return $('<td><div class="tile" data-row='+tile.row+' data-column='+tile.column+'>'+tile.letter+'</div></td>');
 }

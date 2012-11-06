@@ -15,18 +15,8 @@
 	display: inline-block;
 }
 
-#board ul {
-	list-style: none;
-
-	display: inline-block;
-}
-
-ul.row {
-	display: inline-block;
-}
-
-.row li {
-	display: inline-block;
+#board table {
+	border-spacing: 0;
 }
 
 .tile {
