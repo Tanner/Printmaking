@@ -20,7 +20,9 @@ function init() {
 	$('#board').append(createBoard(board));
 
 	$('#players').append($('<div id="current">'));
+
 	changeCurrentArrowColor(players[game.currentPlayerIndex].color);
+	moveCurrentArrowToPlayer(players[game.currentPlayerIndex]);
 }
 
 function createBoard(board) {
@@ -62,4 +64,13 @@ function createPlayer(player) {
 
 function changeCurrentArrowColor(color) {
 	$('#current').css('border-color', 'rgb('+color.red+', '+color.green+', '+color.blue+') transparent transparent transparent');
+}
+
+function moveCurrentArrowToPlayer(player) {
+	var playerPosition = $('.player#'+player.name)[0].getBoundingClientRect();
+	var currentPosition = $('#current')[0].getBoundingClientRect();
+
+	var distanceToMove = ((playerPosition.width / 2) + playerPosition.left) - ((currentPosition.width / 2) + currentPosition.left);
+
+	$('#current').transition({ x: distanceToMove+'px' });
 }
