@@ -19,6 +19,7 @@ function init() {
 
 	$('#board').append(createBoard(board));
 
+	$('#players').append($('<div id="current">'));
 	changeCurrentArrowColor(players[game.currentPlayerIndex].color);
 }
 
