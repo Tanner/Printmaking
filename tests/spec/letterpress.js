@@ -115,6 +115,23 @@ describe("A Letterpress game", function() {
 		});
 	});
 
+	describe("should update the player scores", function() {
+		it("when one player plays", function() {
+			var move = new Move([
+				{row: 0, column: 0},
+				{row: 0, column: 1},
+				{row: 1, column: 0},
+				{row: 1, column: 1}
+			]); // cats
+
+			var letterpress = new Letterpress(new Board(2, 2, "cats"), players);
+
+			letterpress.play(move);
+
+			expect(letterpress.players[0].score).toEqual(4);
+		});
+	});
+
 	describe("should end the game", function() {
 		it("when all the players have passed their turns", function() {
 			var letterpress = new Letterpress(board, players);

@@ -43,6 +43,14 @@ var Letterpress = function(board, players) {
 			// Word passes all tests, so we can play it
 			this.playedWords.push(word);
 
+			// Update scores
+			var scoreChanges = board.getScoreChangesForMove(this.currentPlayerIndex, move);
+
+			for (var player in scoreChanges) {
+				this.players[player].score += scoreChanges[player].changed;
+			}
+
+			// Update the board
 			this.board.play(this.currentPlayerIndex, move);
 		} else {
 			this.passes++;
