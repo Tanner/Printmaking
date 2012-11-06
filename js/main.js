@@ -13,8 +13,11 @@ function init() {
 
 	game = new Letterpress(board, players);
 
+	for (var i in players) {
+		$('#players').append(createPlayer(players[i]));
+	}
+
 	$('#board').append(createBoard(board));
-	$('#letterpress').css('width', $('#board').width() + 'px');
 }
 
 function createBoard(board) {
@@ -39,4 +42,14 @@ function createBoard(board) {
 
 function createTile(tile) {
 	return $('<div class="tile" data-row='+tile.row+' data-column='+tile.column+'>'+tile.letter+'</div>');
+}
+
+function createPlayer(player) {
+	var element = $('<div class="player" id="'+player.name+'"></div>');
+	var color = player.color;
+
+	element.css('border-color', 'rgba('+color.red+', '+color.green+', '+color.blue+', 1)');
+	console.log(element);
+
+	return element;
 }
