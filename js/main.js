@@ -14,19 +14,24 @@ function init() {
 	game = new Letterpress(board, players);
 
 	$('#board').append(createBoard(board));
+	$('#letterpress').css('width', $('#board').width() + 'px');
 }
 
 function createBoard(board) {
 	var boardElement = $('<ul class="board">');
 
 	for (var row = 0; row < board.rows; row++) {
-		var rowElement = $('<ul class="row">');
+		var rowElement = $('<li>');
+		var rowList = $('<ul class="row">');
 
 		for (var column = 0; column < board.columns; column++) {
-			rowElement.append(createTile(board.getTileAtPosition(row, column)));
+			rowList.append(createTile(board.getTileAtPosition(row, column)));
 		}
 
-		rowElement.append('</ul>');
+		rowList.append('</ul>');
+
+		rowElement.append(rowList);
+		rowElement.append('</li>');
 
 		boardElement.append(rowElement);
 	}

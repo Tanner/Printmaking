@@ -3,11 +3,27 @@
 	padding: 0;
 }
 
-#board ul {
-	list-style: none;
+#letterpress {
+	margin: 0 auto;
+
+	padding-top: 20px;
 }
 
-#board li {
+#board {
+	display: inline-block;
+}
+
+#board ul {
+	list-style: none;
+
+	display: inline-block;
+}
+
+ul.row {
+	display: inline-block;
+}
+
+.row li {
 	display: inline-block;
 }
 
