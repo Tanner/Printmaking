@@ -166,7 +166,6 @@ describe("A board", function() {
 			board.play(1, move);
 
 			var defendedTile = board.getTileAtPosition(0, 0); // c
-			console.log(defendedTile);
 
 			expect(defendedTile.isDefended()).toEqual(false);
 			expect(defendedTile.owner).toEqual(0);
