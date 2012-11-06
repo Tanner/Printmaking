@@ -48,7 +48,11 @@ function createPlayer(player) {
 	var element = $('<div class="player" id="'+player.name+'"></div>');
 	var color = player.color;
 
-	element.css('border-color', 'rgba('+color.red+', '+color.green+', '+color.blue+', 1)');
+	var bubble = $('<div>').css('border-color', 'rgba('+color.red+', '+color.green+', '+color.blue+', 1)');
+	element.append(bubble);
+
+	var score = $('<span>'+player.score+'</span>');
+	element.append(score);
 
 	return element;
 }

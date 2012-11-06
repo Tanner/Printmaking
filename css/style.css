@@ -17,6 +17,12 @@
 }
 
 .player {
+	display: inline-block;
+
+	margin: 0 5px;
+}
+
+.player div {
 	box-sizing: border-box;
 
 	width: 50px;
@@ -25,10 +31,12 @@
 	border-radius: 50px;
 
 	border: 5px solid #000;
+}
 
-	display: inline-block;
-
-	margin: 0 5px;
+.player span {
+	font-family: sans-serif;
+	font-style: bolder;
+	font-size: 30px;
 }
 
 #board {
