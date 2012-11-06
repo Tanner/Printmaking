@@ -49,7 +49,6 @@ function createPlayer(player) {
 	var color = player.color;
 
 	element.css('border-color', 'rgba('+color.red+', '+color.green+', '+color.blue+', 1)');
-	console.log(element);
 
 	return element;
 }
