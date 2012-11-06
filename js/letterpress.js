@@ -84,9 +84,9 @@ var Player = function(name) {
 	this.score = 0;
 
 	this.color = {
-		red: Math.random() * 255,
-		blue: Math.random() * 255,
-		green: Math.random() * 255
+		red: Math.round(Math.random() * 255),
+		blue: Math.round(Math.random() * 255),
+		green: Math.round(Math.random() * 255)
 	}
 }
 
