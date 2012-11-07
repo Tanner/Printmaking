@@ -23,6 +23,51 @@ function init() {
 
 	changeCurrentArrowColor(players[game.currentPlayerIndex].color);
 	moveCurrentArrowToPlayer(players[game.currentPlayerIndex]);
+
+	game.play(new Move([
+		{ row: 0, column: 0 },
+		{ row: 1, column: 1 },
+		{ row: 0, column: 1 },
+		{ row: 1, column: 0 }
+	]));
+
+	update();
+}
+
+function update() {
+	updateBoard();
+	updatePlayerScores();
+	updateCurrentArrow();
+}
+
+function updateBoard() {
+	$('.tile').each(function (i) {
+		var row = $(this).attr('data-row');
+		var column = $(this).attr('data-column');
+
+		var tile = board.getTileAtPosition(row, column);
+
+		if (tile.owner != null) {
+			var color = players[tile.owner].color;
+
+			var alpha = tile.isDefended() ? 1.0 : 0.5;
+
+			$(this).css('background', 'rgba('+color.red+', '+color.green+', '+color.blue+', '+alpha+')');
+		}
+	});
+}
+
+function updateCurrentArrow() {
+	var currentPlayer = players[game.currentPlayerIndex];
+
+	moveCurrentArrowToPlayer(currentPlayer);
+	changeCurrentArrowColor(currentPlayer.color);
+}
+
+function updatePlayerScores() {
+	for (var i in players) {
+		$('.player#'+players[i].name+' span').text(players[i].score);
+	}
 }
 
 function createBoard(board) {
