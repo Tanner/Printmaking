@@ -72,5 +72,5 @@ function moveCurrentArrowToPlayer(player) {
 
 	var distanceToMove = ((playerPosition.width / 2) + playerPosition.left) - ((currentPosition.width / 2) + currentPosition.left);
 
-	$('#current').transition({ x: distanceToMove+'px' });
+	$('#current').transition({ x: distanceToMove+'px', duration: 500 });
 }
